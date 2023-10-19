@@ -1,0 +1,37 @@
+---
+# tasks file for lighttpd
+- name: Set a hostname
+  hostname:
+    name: "{{ hostname }}"
+
+- name: "Executar sudo apt update"
+  command: sudo apt update
+
+- name: "Instalacao do pacote lighttpd"
+  apt:
+    name: lighttpd
+    state: present
+
+- name: "Iniciar o Serviço"
+  service:
+    name: lighttpd
+    state: started
+
+- name: "Habilitar o serviço lighttpd"
+  command: systemctl enable lighttpd
+
+- name: "Criar o diretório /meu_diretorio_web"
+  file:
+    path: /meu_diretorio_web
+    state: directory
+
+- name: "Copiar o arquivo index.html"
+  copy:
+    src: files/index.html
+    dest: /meu_diretorio_web
+
+- name: "Alterar arquivo lighttpd.conf"
+  template:
+    src: templates/lighttpd.conf
+    dest: /etc/lighttpd/lighttpd.conf
+  notify: restartLighttpd

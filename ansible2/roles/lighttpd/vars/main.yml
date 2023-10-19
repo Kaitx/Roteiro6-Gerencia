@@ -1,0 +1,5 @@
+---
+# vars file for lighttpd
+
+server_document: "/meu_diretorio_web"
+port_lighttpd: "8080"

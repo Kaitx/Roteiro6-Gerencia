@@ -1,0 +1,6 @@
+---
+# handlers file for lighttpd
+- name: "restartLighttpd"
+  service:
+    name: lighttpd
+    state: restarted
